@@ -1,50 +1,51 @@
-name: Unzip and Log Sample Files Take 1
-
+name: Manual Deployment
 
 on:
-  push:
   workflow_dispatch:
+    inputs:
+      my_input:
+        description: 'An input parameter'
+        required: false
 
 jobs:
-  unzip-log-commit:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v3
+      # Remove existing contents of the GitHub Pages branch
+      - name: Clear GitHub Pages branch
+        run: |
+          rm -rf ./*
+          rm -rf .github
+          echo "Cleared existing contents"
+
+      # Copy public directory to GitHub Pages
+      - name: Copy public directory
+        run: cp -r public/* .
+
+      # Unzip sample files to a 'samples' directory
+      - name: Unzip sample files
+        run: |
+          mkdir -p samples
+          unzip -q sample1.zip -d samples/
+          unzip -q sample2.zip -d samples/
+          echo "Unzipped sample files"
+
+      # Commit changes
+      - name: Commit changes
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add .
+          git commit -m "Update GitHub Pages with latest changes" || true
+          echo "Changes committed"
+
+      # Push changes to GitHub Pages branch
+      - name: Push changes to GitHub Pages
+        uses: ad-m/github-push-action@master
         with:
-          node-version: '20'
-
-      - name: Install Unzip
-        run: sudo apt-get install unzip
-
-      - name: Log Before Unzipping samples1.zip
-        run: |
-          echo "Unzipping samples1.zip..."
-          ls -l --full-time # Lists current directory contents for logging
-          ls -l --full-time ./samples # end mmmmmmmmm
-
-
-      - name: Unzip samples1.zip
-        run: unzip -o samples1.zip -d ./ # -o to overwrite without prompting
-
-      - name: Log After Unzipping samples1.zip
-        run: |
-          echo "Unzipped samples1.zip"
-          ls -l --full-time # Lists current directory contents again to show changes
-
-      - name: Log Before Unzipping samples2.zip
-        run: |
-          echo "Unzipping samples2.zip..."
-          ls -l --full-time # list before xxxxxx
-
-      - name: Unzip samples2.zip
-        run: unzip -o samples2.zip -d ./
-
-      - name: Log After kk Unzipping samples2.zip
-        run: |
-          echo "Unzipped sample2.zip"
-          ls -l --full-time ./samples # end jjjjjj
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
