@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Finder1</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0; /* Light grey background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+	.song-index {
+	    color: red; /* Make index appear in dark red */
+	    font-family: Arial, sans-serif; /* Change this to any font you prefer */
+	}
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .result-list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow-y: auto; /* Enable vertical scrolling */
+            max-height: 600px;
+            background-color: #fff; /* White background for the list */
+            border: 1px solid #ddd; /* Light grey border */
+            border-radius: 5px;
+        }
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee; /* Light grey border for separating items */
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center items vertically */
+        }
+        .result-item:last-child {
+            border-bottom: none; /* Remove bottom border for the last item */
+        }
+        .index {
+            width: 50px; /* Fixed width for index */
+            margin-right: 10px; /* Space between index and title */
+            text-align: right; /* Right align the index */
+            font-family: monospace; /* Use monospace font for the index */
+            color: #555; /* Dark grey color for index */
+        }
+        .title {
+            flex-grow: 1; /* Allow title to take up remaining space */
+            overflow: hidden; /* Prevent overflow */
+            text-overflow: ellipsis; /* Add ellipsis for overflowed content */
+            white-space: nowrap; /* Keep the title in a single line */
+        }
+    </style>
+</head>
+<body>
+<div class="search-box">
+    <input type="text" id="searchQuery" placeholder="Type part of a song title" oninput="searchSong()">
+</div>
+<ul id="searchResults" class="result-list"></ul>
+
+<script src="search.js"></script>
+</body>
+</html>

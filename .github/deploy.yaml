@@ -1,0 +1,50 @@
+name: Unzip and Log Sample Files Take 1
+
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  unzip-log-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Unzip
+        run: sudo apt-get install unzip
+
+      - name: Log Before Unzipping samples1.zip
+        run: |
+          echo "Unzipping samples1.zip..."
+          ls -l --full-time # Lists current directory contents for logging
+          ls -l --full-time ./samples # end mmmmmmmmm
+
+
+      - name: Unzip samples1.zip
+        run: unzip -o samples1.zip -d ./ # -o to overwrite without prompting
+
+      - name: Log After Unzipping samples1.zip
+        run: |
+          echo "Unzipped samples1.zip"
+          ls -l --full-time # Lists current directory contents again to show changes
+
+      - name: Log Before Unzipping samples2.zip
+        run: |
+          echo "Unzipping samples2.zip..."
+          ls -l --full-time # list before xxxxxx
+
+      - name: Unzip samples2.zip
+        run: unzip -o samples2.zip -d ./
+
+      - name: Log After kk Unzipping samples2.zip
+        run: |
+          echo "Unzipped sample2.zip"
+          ls -l --full-time ./samples # end jjjjjj
+
