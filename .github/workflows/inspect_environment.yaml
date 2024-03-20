@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: List directory contents
-        run: ls -lt
+        run: |
+             ls -lt
              echo ${{ github.workspace }}
              echo $GITHUB_WORKSPACE	
