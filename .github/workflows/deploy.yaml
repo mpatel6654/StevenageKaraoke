@@ -38,5 +38,5 @@ jobs:
 
       - name: List contents
         run: |
-          ls -l
+          ls -ltR
 
