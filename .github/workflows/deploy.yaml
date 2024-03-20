@@ -11,51 +11,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Debugging output: List contents of current directory
-      - name: List current directory contents
-        run: ls -al
+      # Assuming the 'public' directory and 'samples' zip files exist in your repo
+      - name: Setup Node.js (Optional, for additional build steps)
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      # Debugging output: Print current working directory
-      - name: Print current working directory and list contents
+      # Add steps for any build processes for your public directory here
+      # For example, npm install and build if you're using a Node.js project
+
+      - name: Unzip sample files to 'samples' directory
         run: |
-          pwd
-          ls -al
+          mkdir -p public/samples
+          unzip samples/sample1.zip -d public/samples/
+          unzip samples/sample2.zip -d public/samples/
 
-      # Remove existing contents of the GitHub Pages branch
-      - name: Clear GitHub Pages branch
-        run: |
-          rm -rf ./*
-          rm -rf .github
-          echo "Cleared existing contents"
-
-      # Debugging output: List contents of 'public' directory
-      - name: List public directory contents
-        run: ls -al public
-
-      # Copy public directory to GitHub Pages
-      - name: Copy public directory
-        run: cp -r public/* .
-
-      # Unzip sample files to a 'samples' directory
-      - name: Unzip sample files
-        run: |
-          mkdir -p samples
-          unzip -q sample1.zip -d samples/
-          unzip -q sample2.zip -d samples/
-          echo "Unzipped sample files"
-
-      # Commit changes
-      - name: Commit changes
-        run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
-          git add .
-          git commit -m "Update GitHub Pages with latest changes" || true
-          echo "Changes committed"
-
-      # Push changes to GitHub Pages branch
-      - name: Push changes to GitHub Pages
-        uses: ad-m/github-push-action@master
+      # Deploy to GitHub Pages using peaceiris/actions-gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
+          publish_dir: ./public
