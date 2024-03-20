@@ -1,37 +1,26 @@
-name: Manual Deployment to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4 # Updated to use version 4
 
-      - name: Set up Node.js (using Node.js 20)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+    # Add steps for any build process you have here
+    - name: unzip samples1.zip
+      run: unzip samples/sample1.zip -d public/
 
-      # No need to clear the workspace as we can directly work with it
-      
-      - name: Copy files from public to root (if needed)
-        run: |
-          cp -r public/* .
+    - name: unzip samples2.zip
+      run: unzip samples/sample2.zip -d public/
 
-      - name: Unpack sample1.zip to the samples directory
-        run: |
-          unzip samples/sample1.zip -d samples/
-          
-      - name: Unpack sample2.zip to the same samples directory
-        run: |
-          unzip samples/sample2.zip -d samples/
-          
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages # The target branch for deployments
+        publish_dir: ./public # The folder that you want to deploy
