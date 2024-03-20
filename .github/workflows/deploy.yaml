@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: List variables
       - run: |
-          ls -l =
+          ls -l # list
           # echo ${{ github.workspace }}
           # echo $GITHUB_WORKSPACE
  
