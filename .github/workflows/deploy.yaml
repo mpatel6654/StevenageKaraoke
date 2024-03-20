@@ -35,3 +35,7 @@ jobs:
           publish_dir: ./public
           allow_empty_commit: true
           keep_files: true # Keep the previously deployed files, now including unzipped content
+
+      - name: List contents
+        run: |
+	  la -lt
