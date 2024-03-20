@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name List variables
-      - run: |	
+      - name: List variables
+      - run: |
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
 	  
