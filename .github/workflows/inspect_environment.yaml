@@ -1,0 +1,11 @@
+name: Inspect Environment
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List directory contents
+        run: ls -l
