@@ -4,14 +4,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  mnp_deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: List variables
       - run: |
-          echo ${{ github.workspace }}
-          echo $GITHUB_WORKSPACE
+          ls -l =
+          # echo ${{ github.workspace }}
+          # echo $GITHUB_WORKSPACE
  
       - name: Checkout repository
         uses: actions/checkout@v2
