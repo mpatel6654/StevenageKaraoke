@@ -8,42 +8,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Deploy to GitHub Pages (Initial Deployment)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages # Target branch to deploy
+          publish_dir: ./public # Directory containing final build assets to deploy
+          allow_empty_commit: true
+          keep_files: false # Replace everything in gh-pages branch with public content
 
-    - name: Install dependencies
-      run: npm install
+      - name: Unpack samples
+        run: |
+          unzip samples/sample1.zip -d ./public/samples/
+          unzip samples/sample2.zip -d ./public/samples/
+        # Assuming your zipped files are directly under the samples/ directory and
+        # you want to unzip them into the public/samples/ directory for deployment.
 
-    - name: Build (if applicable)
-      run: npm run build # Remove or modify this step based on your project needs
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages # Target branch to deploy
-        publish_dir: ./public # Directory containing final build assets to deploy
-        allow_empty_commit: true
-        keep_files: false # Set to true to keep existing files in gh-pages branch
-
-    - name: Unpack samples
-      run: |
-        unzip samples/sample1.zip -d ./public/samples/
-        unzip samples/sample2.zip -d ./public/samples/
-      # Assuming your zipped files are directly under the samples/ directory and
-      # you want to unzip them into the public/samples/ directory for deployment.
-
-    - name: Deploy updated content
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: ./public
-        allow_empty_commit: true
-        keep_files: true # Keep the previously deployed files, now including unzipped content
-
+      - name: Deploy updated content (Including samples)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./public
+          allow_empty_commit: true
+          keep_files: true # Keep the previously deployed files, now including unzipped content
