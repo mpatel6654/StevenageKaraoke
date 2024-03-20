@@ -22,7 +22,7 @@ jobs:
       # Debugging output: Print current working directory
       - name: Print current working directory and list contents
         run: |
-	  pwd
+          pwd
           ls -al
 
       # Remove existing contents of the GitHub Pages branch
