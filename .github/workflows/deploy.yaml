@@ -1,4 +1,4 @@
-name: Manual Deployment
+name: Manual Deployment to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -9,26 +9,30 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      # Assuming the 'public' directory and 'samples' zip files exist in your repo
-      - name: Setup Node.js (Optional, for additional build steps)
-        uses: actions/setup-node@v2
+      - name: Set up Node.js (using Node.js 20)
+        uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '20'
 
-      # Add steps for any build processes for your public directory here
-      # For example, npm install and build if you're using a Node.js project
-
-      - name: Unzip sample files to 'samples' directory
+      # No need to clear the workspace as we can directly work with it
+      
+      - name: Copy files from public to root (if needed)
         run: |
-          mkdir -p public/samples
-          unzip samples/sample1.zip -d public/samples/
-          unzip samples/sample2.zip -d public/samples/
+          cp -r public/* .
 
-      # Deploy to GitHub Pages using peaceiris/actions-gh-pages
+      - name: Unpack sample1.zip to the samples directory
+        run: |
+          mkdir -p samples
+          unzip sample1.zip -d samples/
+          
+      - name: Unpack sample2.zip to the same samples directory
+        run: |
+          unzip sample2.zip -d samples/
+          
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./
