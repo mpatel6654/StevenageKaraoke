@@ -38,4 +38,4 @@ jobs:
 
       - name: List contents
         run: |
-	  la -lt
+	  ls -lt
