@@ -46,7 +46,7 @@ jobs:
        run: |
          git config --local user.email "action@github.com"
          git config --local user.name "GitHub Action"
-#        git add .
+         #        git add .
          git commit -m "Deploy unzipped content to gh-pages" -a || echo "No changes to commit"
          git push origin gh-pages
 
