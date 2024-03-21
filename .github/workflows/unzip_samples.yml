@@ -29,8 +29,8 @@ jobs:
     # Step 3: Unzip the files
     - name: Unzip files
       run: |
-        unzip main-content/samples/sample1.zip -d samples/
-        unzip main-content/samples/sample2.zip -d samples/
+        unzip main-content/samples/sample1.zip -d .
+        unzip main-content/samples/sample2.zip -d .
 
     - name: List after unzip checkout
       run: ls -ltR
