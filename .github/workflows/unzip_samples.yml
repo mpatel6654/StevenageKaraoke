@@ -42,8 +42,8 @@ jobs:
 #        mv path/to/destination/somefile path/to/gh-pages-destination
 
 #    # Step 5: Commit and push changes to gh-pages 1
-#    - name: Commit and push
-#      run: |
+     - name: Commit and push
+       run: |
          git config --local user.email "action@github.com"
          git config --local user.name "GitHub Action"
 #        git add .
