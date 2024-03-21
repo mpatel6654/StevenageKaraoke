@@ -1,0 +1,42 @@
+name: Deploy Zips to gh-pages
+
+on:
+  # Trigger on manual dispatch, you can also set other triggers
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # Step 1: Check out gh-pages branch
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+
+    # Step 2: Check out the zip files from the main branch
+    - name: Checkout main for zip files
+      uses: actions/checkout@v2
+      with:
+        ref: main
+        path: 'main-content'
+
+    # Step 3: Unzip the files
+    - name: Unzip files
+      run: |
+        unzip main-content/path/to/sample1.zip -d gh-pages/samples/
+        unzip main-content/path/to/sample2.zip -d gh-pages/samples/
+
+#    # Optional: Step 4, if you need to move files around or further process them
+#    - name: Move files
+#      run: |
+#        mv path/to/destination/somefile path/to/gh-pages-destination
+
+    # Step 5: Commit and push changes to gh-pages
+    - name: Commit and push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Deploy unzipped content to gh-pages" -a || echo "No changes to commit"
+        git push origin gh-pages
+
