@@ -42,13 +42,13 @@ jobs:
       #        mv path/to/destination/somefile path/to/gh-pages-destination
 
       #    # Step 5: Commit and push changes to gh-pages 2
-    - name: Commit and push
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        ls -ltR > ./samples/mnp.txt
-        git add ./samples/mnp.txt
-        #        git add .
-        git commit -m "Deploy unzipped content to gh-pages" -a || echo "No changes to commit"
-        git push origin gh-pages
+#    - name: Commit and push
+#      run: |
+#        git config --local user.email "action@github.com"
+#        git config --local user.name "GitHub Action"
+#        ls -ltR > ./samples/mnp.txt
+#        git add ./samples/mnp.txt
+#        #        git add .
+#        git commit -m "Deploy unzipped content to gh-pages" -a || echo "No changes to commit"
+#        git push origin gh-pages
 
