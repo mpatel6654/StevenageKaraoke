@@ -33,7 +33,7 @@ function searchSong() {
 
         const indexSpan = document.createElement('span');
         indexSpan.className = 'song-index';
-        indexSpan.textContent = `${number}.`;
+        indexSpan.textContent = `${number}`;
 
         const songTitle = document.createElement('span');
         songTitle.className = 'song-title'; // Ensure this matches your CSS for the song title
