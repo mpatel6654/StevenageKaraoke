@@ -13,13 +13,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-        .song-index {
-            color: red; /* If you want the index number in dark red */
-            margin-right: 10px; /* Ensure spacing between index and play button */
-            width: 50px; /* Set a fixed width for the index to align the buttons */
-            text-align: right; /* Align the text to the right within the fixed width */
-      	}
+      }
+      .song-index {
+            color: red;
+            margin-right: 10px;
+            width: 50px;
+            text-align: right;
+      }
         .search-box {
             width: 100%;
             max-width: 600px;
@@ -43,14 +43,18 @@
             background-color: #fff; /* White background for the list */
             border: 1px solid #ddd; /* Light grey border */
             border-radius: 5px;
-        }
-        .result-item {
+       }
+       .result-item {
             padding: 10px;
-            border-bottom: 1px solid #eee; /* Light grey border for separating items */
-            display: flex; /* Use flexbox for layout */
-            align-items: center; /* Center items vertically */
-            justify-content: flex-start; /* Align items to the start of the container */
-        }
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+      }
+      .play-button {
+             margin-right: 20px;
+      }
+      
         .play-button {
             margin-right: 20px; /* Add space between the play button and the song title */
         }
@@ -64,13 +68,14 @@
             text-align: right; /* Right align the index */
             font-family: monospace; /* Use monospace font for the index */
             color: #555; /* Dark grey color for index */
-        }
-        .title {
-            flex-grow: 1; /* Allow title to take up remaining space */
-            overflow: hidden; /* Prevent overflow */
-            text-overflow: ellipsis; /* Add ellipsis for overflowed content */
-            white-space: nowrap; /* Keep the title in a single line */
-        }
+      }
+      .song-title {
+            white-space: nowrap; /* Prevent titles from wrapping onto new lines */
+            overflow: hidden; /* Hide overflow text */
+            text-overflow: ellipsis; /* Add ellipsis for overflow text */
+            flex-grow: 1; /* Allow the song title to fill available space */
+            margin-right: 10px; /* Optional: Adds some space to the right */
+      }
     </style>
 </head>
 <body>
