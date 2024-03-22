@@ -5,21 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Finder1</title>
     <style>
-      body {
+        body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f0f0f0; /* Change this value to set a different plain background color */
+            background-color: #f0f0f0; /* Plain background color */
             display: flex;
             flex-direction: column;
             align-items: center;
-      }
-      .song-index {
-            color: red;
-            margin-right: 10px;
-            width: 50px;
-            text-align: right;
-      }
+        }
         .search-box {
             width: 100%;
             max-width: 600px;
@@ -43,39 +37,34 @@
             background-color: #fff; /* White background for the list */
             border: 1px solid #ddd; /* Light grey border */
             border-radius: 5px;
-       }
-       .result-item {
+        }
+        .result-item {
             padding: 10px;
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-      }
-      .play-button {
-             margin-right: 20px;
-      }
-      
-        .play-button {
-            margin-right: 20px; /* Add space between the play button and the song title */
         }
-      
         .result-item:last-child {
             border-bottom: none; /* Remove bottom border for the last item */
         }
-        .index {
-            width: 50px; /* Fixed width for index */
-            margin-right: 10px; /* Space between index and title */
-            text-align: right; /* Right align the index */
-            font-family: monospace; /* Use monospace font for the index */
-            color: #555; /* Dark grey color for index */
-      }
-      .song-title {
+        .play-button {
+            margin-right: 20px; /* Add space between the play button and the song title */
+        }
+        .song-title {
             white-space: nowrap; /* Prevent titles from wrapping onto new lines */
             overflow: hidden; /* Hide overflow text */
             text-overflow: ellipsis; /* Add ellipsis for overflow text */
             flex-grow: 1; /* Allow the song title to fill available space */
             margin-right: 10px; /* Optional: Adds some space to the right */
-      }
+        }
+        .song-index {
+            width: 50px; /* Fixed width for index */
+            margin-right: 10px; /* Space between index and title */
+            text-align: right; /* Right align the index */
+            font-family: monospace; /* Use monospace font for the index */
+            color: #555; /* Dark grey color for index */
+        }
     </style>
 </head>
 <body>
